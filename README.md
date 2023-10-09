@@ -16,7 +16,7 @@
 
 ### 1. Entity Diagram
 
-<img src=./images/1.png>
+<img src="file:/home/somin/WebstormProjects/wanted-pre-onboarding-backend/backend/images/1.png">
 
 `채용공고(recruitment)` 와 `사용자(user)` 다대다 관계를 일대다 다대일 로 구현
 
