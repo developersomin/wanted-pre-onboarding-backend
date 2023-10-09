@@ -1,0 +1,75 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Company {
+  id: String!
+  name: String!
+  country: String!
+  area: String!
+}
+
+type User {
+  id: String!
+  name: String!
+  apply: Boolean!
+  userRecruitments: [UserRecruitment!]!
+}
+
+type UserRecruitment {
+  id: String!
+  recruitment: Recruitment!
+  user: User!
+}
+
+type Recruitment {
+  id: String!
+  position: String!
+  reward: Int!
+  contents: String!
+  stack: String!
+  company: Company!
+  userRecruitments: [UserRecruitment!]!
+}
+
+type DetailRecruitmentOutput {
+  id: String!
+  position: String!
+  reward: Int!
+  contents: String!
+  stack: String!
+  company: Company!
+  userRecruitments: [UserRecruitment!]!
+  companyRecruitmentId: [String!]!
+}
+
+type Query {
+  fetchRecruitment(recruitmentId: String!): Recruitment!
+  fetchRecruitments: [Recruitment!]!
+  showApplicant(recruitmentId: String!): Recruitment!
+  detailFetchRecruitment(recruitmentId: String!): DetailRecruitmentOutput!
+  searchFindAll(search: String!): [Recruitment!]!
+  findAll: UserRecruitment!
+}
+
+type Mutation {
+  createRecruitment(createRecruitmentInput: CreateRecruitmentInput!): Recruitment!
+  updateRecruitment(recruitmentId: String!, updateRecruitmentInput: UpdateRecruitmentInput!): Recruitment!
+  deleteRecruitment(recruitmentId: String!): Boolean!
+  apply(userId: String!, recruitmentId: String!): UserRecruitment!
+}
+
+input CreateRecruitmentInput {
+  position: String!
+  reward: Int!
+  contents: String!
+  stack: String!
+  companyId: String!
+}
+
+input UpdateRecruitmentInput {
+  position: String
+  reward: Int
+  contents: String
+  stack: String
+}
