@@ -16,7 +16,7 @@
 
 ### 1. Entity Diagram
 
-<img src="file:/home/somin/WebstormProjects/wanted-pre-onboarding-backend/backend/images/1.png">
+![1](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/c2b5179d-8fe9-437d-9ae8-d043e064222a)
 
 `채용공고(recruitment)` 와 `사용자(user)` 다대다 관계를 일대다 다대일 로 구현
 
@@ -24,17 +24,18 @@
 
 ### 2-1. 회사 등록
 
-<img src=./images/2.png>
+![2](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/b9987829-afcd-4def-8cce-71f5696b17a9)
 
 
-<img src=./images/3.png>
-)
+![3](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/69db4364-5946-4a60-ba4a-5e0f44c74cc5)
 채용 공고를 위해 회사 등록 ( mysql에서 직접 생성 )
 
 ### 2-2. 사용자 등록
 
-<img src=./images/4.png>
-<img src=./images/5.png>
+![4](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/7cc242f4-157a-4f3d-9a06-60918c52abf8)
+
+![5](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/1a4928ab-c0cd-4e63-9be3-ee2ac910fa75)
+
 
 채용 공고 신청을 위해 사용자 등록 ( apply 값은 디폴트 값을 false 했기 때문에 0으로 출력)
 
@@ -316,7 +317,8 @@ mutation{
 }
 ```
 
-<img src=./images/6.png>
+![6](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/e4f4cad2-04af-4d93-b781-bfd75ddbdba5)
+
 
 안소민 apply가 true로 바뀐 것을 볼 수 있다. 여기서 신청한 사용자가 다른 공고를 한번 더 신청 하면 실패하는 것을 볼 수 있다.
 ```graphql
