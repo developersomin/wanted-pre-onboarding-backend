@@ -5,7 +5,6 @@
 
 ## 요구사항 분석
 
-<<<<<<< HEAD
 - ORM 사용하여 구현 : ORM인 `typeORM` 사용
 - RDBMS 사용 (SQLite, PostgreSQL 등) : `mysql` 사용
 - 코드 가독성을 위해 `prettier` 설정
