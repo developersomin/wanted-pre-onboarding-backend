@@ -14,16 +14,18 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  checkApply({ user }: IUserServiceIsApply) {
+  async checkApply({ user }: IUserServiceIsApply): Promise<Boolean> {
     if (user.apply) {
       throw new UnprocessableEntityException(
         '지원하신 내역이 있습니다. 사용자는 1회만 지원 가능합니다.',
       );
     }
-    this.userRepository.save({
+    await this.userRepository.save({
       ...user,
       apply: true,
     });
+
+    return true;
   }
 
   async findOne({ userId }: IUserServiceFindOne): Promise<User> {

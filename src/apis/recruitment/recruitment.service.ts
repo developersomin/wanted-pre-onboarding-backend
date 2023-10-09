@@ -100,7 +100,8 @@ export class RecruitmentService {
     };
     return detailRecruitment;
   }
-  async showApplicant({ recruitmentId }): Promise<Recruitment> {
+
+  /*async showApplicant({ recruitmentId }): Promise<Recruitment> {
     const result = await this.recruitmentRepository.findOne({
       where: {
         id: recruitmentId,
@@ -108,5 +109,5 @@ export class RecruitmentService {
       relations: ['userRecruitments'],
     });
     return result;
-  }
+  }*/
 }

@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UserRecruitmentService } from './user-recruitment.service';
 import { UserRecruitment } from './entity/user-recruitment.entity';
 
@@ -8,10 +8,10 @@ export class UserRecruitmentResolver {
     private readonly userRecruitmentService: UserRecruitmentService,
   ) {}
 
-  @Query(() => UserRecruitment)
+  /* @Query(() => UserRecruitment)
   findAll(): Promise<UserRecruitment[]> {
     return this.userRecruitmentService.findAll();
-  }
+  }*/
 
   @Mutation(() => UserRecruitment)
   apply(

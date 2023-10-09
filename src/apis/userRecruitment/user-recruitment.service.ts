@@ -13,9 +13,9 @@ export class UserRecruitmentService {
     private readonly userService: UserService,
   ) {}
 
-  findAll(): Promise<UserRecruitment[]> {
+  /*findAll(): Promise<UserRecruitment[]> {
     return this.userRecruitmentRepository.find();
-  }
+  }*/
 
   async apply({
     userId,

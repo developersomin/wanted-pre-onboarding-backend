@@ -21,12 +21,12 @@ export class RecruitmentResolver {
     return this.recruitmentService.findAll();
   }
 
-  @Query(() => Recruitment)
+  /*@Query(() => Recruitment)
   showApplicant(
     @Args('recruitmentId') recruitmentId: string,
   ): Promise<Recruitment> {
     return this.recruitmentService.showApplicant({ recruitmentId });
-  }
+  }*/
 
   @Query(() => DetailRecruitmentOutput)
   detailFetchRecruitment(
