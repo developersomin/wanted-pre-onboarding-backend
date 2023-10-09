@@ -371,3 +371,19 @@ mutation{
 }
 ```
 
+### Installation
+
+```
+$ yarn install
+```
+
+### Running the app
+
+```
+$ yarn start:dev
+```
+
+### Test
+```
+$ yarn test
+```
