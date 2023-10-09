@@ -46,10 +46,8 @@ type DetailRecruitmentOutput {
 type Query {
   fetchRecruitment(recruitmentId: String!): Recruitment!
   fetchRecruitments: [Recruitment!]!
-  showApplicant(recruitmentId: String!): Recruitment!
   detailFetchRecruitment(recruitmentId: String!): DetailRecruitmentOutput!
   searchFindAll(search: String!): [Recruitment!]!
-  findAll: UserRecruitment!
 }
 
 type Mutation {
