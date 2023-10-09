@@ -16,7 +16,7 @@
 
 ### 1. Entity Diagram
 
-<img src="file:///home/somin/%EC%82%AC%EC%A7%84/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%2017-56-03.png">
+<img src=./images/1.png>
 
 `채용공고(recruitment)` 와 `사용자(user)` 다대다 관계를 일대다 다대일 로 구현
 
@@ -24,18 +24,17 @@
 
 ### 2-1. 회사 등록
 
-<img src="file:///home/somin/%EC%82%AC%EC%A7%84/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%2018-16-22.png">
+<img src=./images/2.png>
 
 
-<img src="file:///home/somin/%EC%82%AC%EC%A7%84/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%2018-16-54.png">
+<img src=./images/3.png>
 )
 채용 공고를 위해 회사 등록 ( mysql에서 직접 생성 )
 
 ### 2-2. 사용자 등록
 
-<img src="file:///home/somin/%EC%82%AC%EC%A7%84/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%2018-23-49.png">
-
-<img src="file:///home/somin/%EC%82%AC%EC%A7%84/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%2018-24-02.png">
+<img src=./images/4.png>
+<img src=./images/5.png>
 
 채용 공고 신청을 위해 사용자 등록 ( apply 값은 디폴트 값을 false 했기 때문에 0으로 출력)
 
@@ -317,7 +316,7 @@ mutation{
 }
 ```
 
-<img src="file:///home/somin/%EC%82%AC%EC%A7%84/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%2019-12-53.png">
+<img src=./images/6.png>
 
 안소민 apply가 true로 바뀐 것을 볼 수 있다. 여기서 신청한 사용자가 다른 공고를 한번 더 신청 하면 실패하는 것을 볼 수 있다.
 ```graphql
