@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
-import {TypeOrmModule} from "@nestjs/typeorm";
-import {GraphQLModule} from "@nestjs/graphql";
-import {ApolloDriver, ApolloDriverConfig} from "@nestjs/apollo";
-import {ConfigModule} from "@nestjs/config";
-import {RecruitmentModule} from "./apis/recruitment/recruitment.module";
-import {UserRecruitmentModule} from "./apis/userRecruitment/user-recruitment.module";
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ConfigModule } from '@nestjs/config';
+import { RecruitmentModule } from './apis/recruitment/recruitment.module';
 
 @Module({
   imports: [
     RecruitmentModule,
-    UserRecruitmentModule,
     ConfigModule.forRoot(),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -27,6 +25,5 @@ import {UserRecruitmentModule} from "./apis/userRecruitment/user-recruitment.mod
       logging: true,
     }),
   ],
-
 })
 export class AppModule {}
