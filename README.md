@@ -262,6 +262,7 @@ query{
     position
     reward
     stack
+    contents
     companyRecruitmentId
   }
 }
@@ -279,6 +280,7 @@ query{
       "position": "백엔드",
       "reward": 150000,
       "stack": "node.js",
+      "contents": "카카오에서 백엔드 주니어 개발자를 채용합니다.",
       "companyRecruitmentId": [
         "1ea1f0b6-f750-47cf-a216-7de277a248a3",
         "d6aa457f-6747-4780-8f47-afc594a9bd4c"
