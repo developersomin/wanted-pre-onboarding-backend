@@ -16,9 +16,10 @@
 
 ### 1. Entity Diagram
 
-![1](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/c2b5179d-8fe9-437d-9ae8-d043e064222a)
+![스크린샷 2023-10-10 23-09-12](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/1bb93313-1261-4ebc-8e1a-796b9c2400df)
 
-`채용공고(recruitment)` 와 `사용자(user)` 다대다 관계를 일대다 다대일 로 구현
+
+`채용공고(recruitment)` 와 `사용자(user)` 다대다 관계 구현
 
 `채용공고(recruitment)` 와 `회사(Company)` 다대일 관계 구현
 
@@ -292,50 +293,46 @@ query{
 ### 6.사용자 채용공고 지원( 선택사항 및 가산점 요소 )
 ```graphql
 mutation{
-  apply(userId:"83d33c1d-6685-11ee-8bc1-e00af663ff07", recruitmentId:"1ea1f0b6-f750-47cf-a216-7de277a248a3"){
-    id
-    user{
-      id
+    applyRecruitment(recruitmentId:"8a5116e8-cd12-41b3-89ce-9bcf80408326",
+        userId:"83476cf2-6685-11ee-8bc1-e00af663ff07"){
+        id
+        stack
+        contents
+        users{
+            id
+            name
+        }
     }
-    recruitment{
-      id
-    }
-  }
 }
 ```
 ```graphql
 {
   "data": {
-    "apply": {
-      "id": "2fec0574-b93b-4610-819d-90f70f5f4971",
-      "user": {
-        "id": "83d33c1d-6685-11ee-8bc1-e00af663ff07"
-      },
-      "recruitment": {
-        "id": "1ea1f0b6-f750-47cf-a216-7de277a248a3"
-      }
+    "applyRecruitment": {
+      "id": "8a5116e8-cd12-41b3-89ce-9bcf80408326",
+      "stack": "node.js",
+      "contents": "카카오에서 백엔드 시니어 개발자를 채용합니다.",
+      "users": [
+        {
+          "id": "83476cf2-6685-11ee-8bc1-e00af663ff07",
+          "name": "강동원"
+        }
+      ]
     }
   }
 }
 ```
+![스크린샷 2023-10-10 23-19-04](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/a62b75bb-f345-4e5a-9caa-b0311bb65595)
 
-![6](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/e4f4cad2-04af-4d93-b781-bfd75ddbdba5)
+recruitment_users_user 라는 테이블에 채용공고의 id와 사용자의 id가 잘 들어 간것을 확인 할 수 있다.
 
 
-안소민 apply가 true로 바뀐 것을 볼 수 있다. 여기서 신청한 사용자가 다른 공고를 한번 더 신청 하면 실패하는 것을 볼 수 있다.
-```graphql
-mutation{
-  apply(userId:"83d33c1d-6685-11ee-8bc1-e00af663ff07", recruitmentId:"d6aa457f-6747-4780-8f47-afc594a9bd4c"){
-    id
-    user{
-      id
-    }
-    recruitment{
-      id
-    }
-  }
-}
-```
+
+요구사항으로 사용자는 채용공고 지원을 한번만 수행할 수 있다고 한다. 보통 사용자는 여러 채용공고에 지원 할 수 있어 다대다 관계로 설정하였고 기회는 한번뿐으므로 apply 컬럼을 만들어 지원현황을 표현했다. 디폴트 값으로 false를 설정하여 지원하면 true로 바뀌도록 구현하였다.
+![스크린샷 2023-10-10 23-16-36](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/761943ab-a4d3-4944-bf85-aa3bb86afb57)
+
+강동원 apply가 true로 바뀐 것을 볼 수 있다. 여기서 신청한 사용자가 다른 공고를 한번 더 신청 하면 실패하는 것을 볼 수 있다.
+
 ```graphql
 {
   "errors": [
@@ -348,17 +345,17 @@ mutation{
         }
       ],
       "path": [
-        "apply"
+        "applyRecruitment"
       ],
       "extensions": {
         "code": "INTERNAL_SERVER_ERROR",
         "stacktrace": [
           "UnprocessableEntityException: 지원하신 내역이 있습니다. 사용자는 1회만 지원 가능합니다.",
-          "    at UserService.checkApply (/home/somin/WebstormProjects/wanted-pre-onboarding-backend/backend/src/apis/user/user.service.ts:18:13)",
-          "    at UserRecruitmentService.apply (/home/somin/WebstormProjects/wanted-pre-onboarding-backend/backend/src/apis/userRecruitment/user-recruitment.service.ts:24:26)",
+          "    at UserService.checkApply (/home/somin/WebstormProjects/wanted-pre-onboarding-backend/backend/src/apis/user/user.service.ts:19:13)",
+          "    at RecruitmentService.applyRecruitment (/home/somin/WebstormProjects/wanted-pre-onboarding-backend/backend/src/apis/recruitment/recruitment.service.ts:113:28)",
           "    at processTicksAndRejections (node:internal/process/task_queues:95:5)",
           "    at target (/home/somin/WebstormProjects/wanted-pre-onboarding-backend/backend/node_modules/@nestjs/core/helpers/external-context-creator.js:74:28)",
-          "    at Object.apply (/home/somin/WebstormProjects/wanted-pre-onboarding-backend/backend/node_modules/@nestjs/core/helpers/external-proxy.js:9:24)"
+          "    at Object.applyRecruitment (/home/somin/WebstormProjects/wanted-pre-onboarding-backend/backend/node_modules/@nestjs/core/helpers/external-proxy.js:9:24)"
         ],
         "status": 422,
         "originalError": {
