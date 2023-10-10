@@ -16,11 +16,11 @@ describe('userService', () => {
   let service: UserService;
   let userRepository: MockRepository<User>;
   const userId = '1';
-  const user: User = {
+  const user = {
     id: '1',
     name: '안소민',
     apply: false,
-    userRecruitments: [],
+    recruitments: [],
   };
 
   beforeEach(async () => {
@@ -43,7 +43,7 @@ describe('userService', () => {
       id: '1',
       name: '안소민',
       apply: true,
-      userRecruitments: [],
+      recruitments: [],
     };
 
     it('User 채용공고 신청시 apply를 true로 바꾸기', async () => {
