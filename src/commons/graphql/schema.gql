@@ -13,13 +13,7 @@ type User {
   id: String!
   name: String!
   apply: Boolean!
-  userRecruitments: [UserRecruitment!]!
-}
-
-type UserRecruitment {
-  id: String!
-  recruitment: Recruitment!
-  user: User!
+  recruitments: [Recruitment!]!
 }
 
 type Recruitment {
@@ -29,7 +23,7 @@ type Recruitment {
   contents: String!
   stack: String!
   company: Company!
-  userRecruitments: [UserRecruitment!]!
+  users: [User!]!
 }
 
 type DetailRecruitmentOutput {
@@ -39,7 +33,7 @@ type DetailRecruitmentOutput {
   contents: String!
   stack: String!
   company: Company!
-  userRecruitments: [UserRecruitment!]!
+  users: [User!]!
   companyRecruitmentId: [String!]!
 }
 
@@ -54,7 +48,7 @@ type Mutation {
   createRecruitment(createRecruitmentInput: CreateRecruitmentInput!): Recruitment!
   updateRecruitment(recruitmentId: String!, updateRecruitmentInput: UpdateRecruitmentInput!): Recruitment!
   deleteRecruitment(recruitmentId: String!): Boolean!
-  apply(userId: String!, recruitmentId: String!): UserRecruitment!
+  applyRecruitment(userId: String!, recruitmentId: String!): Recruitment!
 }
 
 input CreateRecruitmentInput {
