@@ -1,6 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { UserRecruitment } from '../../userRecruitment/entity/user-recruitment.entity';
+import { Recruitment } from '../../recruitment/entity/recruitment.entity';
 
 @Entity()
 @ObjectType()
@@ -17,10 +17,7 @@ export class User {
   @Field(() => Boolean)
   apply: boolean;
 
-  @OneToMany(
-    () => UserRecruitment,
-    (userRecruitment) => userRecruitment.recruitment,
-  )
-  @Field(() => [UserRecruitment])
-  userRecruitments: UserRecruitment[];
+  @ManyToMany(() => Recruitment, (recruitments) => recruitments.users)
+  @Field(() => [Recruitment])
+  recruitments: Recruitment[];
 }

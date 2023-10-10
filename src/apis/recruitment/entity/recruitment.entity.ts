@@ -3,14 +3,15 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Company } from '../../company/entity/company.entity';
-import { UserRecruitment } from '../../userRecruitment/entity/user-recruitment.entity';
+import { User } from '../../user/entity/user.entity';
 
 @Entity()
 @ObjectType()
@@ -39,12 +40,10 @@ export class Recruitment {
   @Field(() => Company)
   company: Company;
 
-  @OneToMany(
-    () => UserRecruitment,
-    (userRecruitment) => userRecruitment.recruitment,
-  )
-  @Field(() => [UserRecruitment])
-  userRecruitments: UserRecruitment[];
+  @JoinTable()
+  @ManyToMany(() => User, (users) => users.recruitments)
+  @Field(() => [User])
+  users: User[];
 
   @CreateDateColumn()
   createAt: Date;
