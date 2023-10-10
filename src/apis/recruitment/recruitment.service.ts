@@ -110,6 +110,7 @@ export class RecruitmentService {
     recruitmentId,
   }: IRecruitmentServiceApplyRecruitment): Promise<Recruitment> {
     const user = await this.userService.findOne({ userId });
+    await this.userService.checkApply({ user });
     const recruitment = await this.recruitmentRepository.findOne({
       where: {
         id: recruitmentId,
