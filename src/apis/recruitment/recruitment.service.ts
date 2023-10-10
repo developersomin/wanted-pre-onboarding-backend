@@ -3,18 +3,21 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Recruitment } from './entity/recruitment.entity';
 import { Repository } from 'typeorm';
 import {
+  IRecruitmentServiceApplyRecruitment,
   IRecruitmentServiceCreate,
   IRecruitmentServiceFindOne,
   IRecruitmentServiceSearch,
   IRecruitmentServiceUpdate,
 } from './interface/recruitment-service.interface';
 import { DetailRecruitmentOutput } from './dto/detail-recruitment.output';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class RecruitmentService {
   constructor(
     @InjectRepository(Recruitment)
     private readonly recruitmentRepository: Repository<Recruitment>,
+    private readonly userService: UserService,
   ) {}
   async create({
     createRecruitmentInput,
@@ -98,16 +101,27 @@ export class RecruitmentService {
       ...recruitment,
       companyRecruitmentId,
     };
+
     return detailRecruitment;
   }
 
-  /*async showApplicant({ recruitmentId }): Promise<Recruitment> {
-    const result = await this.recruitmentRepository.findOne({
+  async applyRecruitment({
+    userId,
+    recruitmentId,
+  }: IRecruitmentServiceApplyRecruitment): Promise<Recruitment> {
+    const user = await this.userService.findOne({ userId });
+    const recruitment = await this.recruitmentRepository.findOne({
       where: {
         id: recruitmentId,
       },
-      relations: ['userRecruitments'],
+      relations: ['users'],
+    });
+    const { users } = recruitment;
+    const temp = [...users, user];
+    const result = await this.recruitmentRepository.save({
+      ...recruitment,
+      users: temp,
     });
     return result;
-  }*/
+  }
 }

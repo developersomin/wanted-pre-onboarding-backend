@@ -1,25 +1,24 @@
-import {CreateRecruitmentInput} from "../dto/create-recruitment.input";
-import {UpdateRecruitmentInput} from "../dto/update-recruitment.input";
+import { CreateRecruitmentInput } from '../dto/create-recruitment.input';
+import { UpdateRecruitmentInput } from '../dto/update-recruitment.input';
 
-export interface IRecruitmentServiceCreate{
-    createRecruitmentInput: CreateRecruitmentInput;
+export interface IRecruitmentServiceCreate {
+  createRecruitmentInput: CreateRecruitmentInput;
 }
 
-export interface IRecruitmentServiceFindOne{
-    recruitmentId: string;
+export interface IRecruitmentServiceFindOne {
+  recruitmentId: string;
 }
 
-export interface IRecruitmentServiceUpdate{
-    recruitmentId: string,
-    updateRecruitmentInput: UpdateRecruitmentInput
+export interface IRecruitmentServiceUpdate {
+  recruitmentId: string;
+  updateRecruitmentInput: UpdateRecruitmentInput;
 }
 
-export interface IRecruitmentServiceDetailRecruitment{
-    id: string,
-    position: string,
-    reward: number,
+export interface IRecruitmentServiceApplyRecruitment {
+  userId: string;
+  recruitmentId: string;
 }
 
-export interface IRecruitmentServiceSearch{
-    search: string
+export interface IRecruitmentServiceSearch {
+  search: string;
 }

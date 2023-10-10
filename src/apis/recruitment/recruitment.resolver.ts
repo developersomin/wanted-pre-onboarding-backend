@@ -21,13 +21,6 @@ export class RecruitmentResolver {
     return this.recruitmentService.findAll();
   }
 
-  /*@Query(() => Recruitment)
-  showApplicant(
-    @Args('recruitmentId') recruitmentId: string,
-  ): Promise<Recruitment> {
-    return this.recruitmentService.showApplicant({ recruitmentId });
-  }*/
-
   @Query(() => DetailRecruitmentOutput)
   detailFetchRecruitment(
     @Args('recruitmentId') recruitmentId: string,
@@ -65,5 +58,13 @@ export class RecruitmentResolver {
     @Args('recruitmentId') recruitmentId: string,
   ): Promise<boolean> {
     return this.recruitmentService.delete({ recruitmentId });
+  }
+
+  @Mutation(() => Recruitment)
+  applyRecruitment(
+    @Args('userId') userId: string,
+    @Args('recruitmentId') recruitmentId: string,
+  ): Promise<Recruitment> {
+    return this.recruitmentService.applyRecruitment({ userId, recruitmentId });
   }
 }
