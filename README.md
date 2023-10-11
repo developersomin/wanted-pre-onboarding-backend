@@ -329,6 +329,7 @@ recruitment_users_user 라는 테이블에 채용공고의 id와 사용자의 id
 
 
 요구사항으로 사용자는 채용공고 지원을 한번만 수행할 수 있다고 한다. 보통 사용자는 여러 채용공고에 지원 할 수 있어 다대다 관계로 설정하였고 기회는 한번뿐으므로 apply 컬럼을 만들어 지원현황을 표현했다. 디폴트 값으로 false를 설정하여 지원하면 true로 바뀌도록 구현하였다.
+
 ![스크린샷 2023-10-10 23-16-36](https://github.com/developersomin/wanted-pre-onboarding-backend/assets/127207131/761943ab-a4d3-4944-bf85-aa3bb86afb57)
 
 강동원 apply가 true로 바뀐 것을 볼 수 있다. 여기서 신청한 사용자가 다른 공고를 한번 더 신청 하면 실패하는 것을 볼 수 있다.
