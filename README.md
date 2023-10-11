@@ -10,7 +10,7 @@
 - 코드 가독성을 위해 `prettier` 설정
 - 필요한 테이블 ( `사용자`, `회사` ,`채용공고`, `지원내역(선택사항)`) : `user` `company` `recruitment` `recruitment_users_user(자동생성)` 테이블 생성
 - Git commit 메시지 컨벤션 : [init] , [Feat], [Fix], [Docs] ,[Test] ,[Style] 사용
-- Unit Test : recruitment, user 테스트 코드 작성
+- Unit Test : recruitmentService, userService 테스트 코드 작성
 
 ## 구현 과정
 
