@@ -72,6 +72,7 @@ describe('userService', () => {
         where: {
           id: '1',
         },
+        relations: ['recruitments'],
       });
       expect(result).toEqual(user);
     });

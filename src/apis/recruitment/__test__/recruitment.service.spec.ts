@@ -5,6 +5,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CreateRecruitmentInput } from '../dto/create-recruitment.input';
 import { UnprocessableEntityException } from '@nestjs/common';
+import { UserService } from '../../user/user.service';
+import { User } from '../../user/entity/user.entity';
 
 const mockRecruitmentRepository = () => ({
   save: jest.fn(),
@@ -17,20 +19,27 @@ type MockRepository<T = any> = Partial<Record<keyof Repository<T>, jest.Mock>>;
 
 describe('recruitmentService', () => {
   let service: RecruitmentService;
+  let userService: UserService;
   let recruitmentRepository: MockRepository<Recruitment>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         RecruitmentService,
+        UserService,
         {
           provide: getRepositoryToken(Recruitment),
+          useValue: mockRecruitmentRepository(),
+        },
+        {
+          provide: getRepositoryToken(User),
           useValue: mockRecruitmentRepository(),
         },
       ],
     }).compile();
 
     service = module.get<RecruitmentService>(RecruitmentService);
+    userService = module.get<UserService>(UserService);
     recruitmentRepository = module.get<MockRepository<Recruitment>>(
       getRepositoryToken(Recruitment),
     );
@@ -205,6 +214,60 @@ describe('recruitmentService', () => {
         expect(e).toBeInstanceOf(UnprocessableEntityException);
         expect(e.message).toBe('해당 공고를 찾을 수 없습니다.');
       }
+    });
+  });
+
+  describe('applyRecruitment()', () => {
+    const userId = '1';
+    const recruitmentId = '1';
+
+    const user = {
+      id: '1',
+      name: '안소민',
+      apply: true,
+      recruitments: [],
+    };
+    const recruitment = {
+      id: '1',
+      position: '백엔드',
+      reward: 10000,
+      stack: '노드',
+      contents: '백엔드 주니어 신입 개발자',
+      company: {
+        Id: '애플_1234',
+      },
+      users: [],
+    };
+    const applyRecruitment = {
+      id: '1',
+      position: '백엔드',
+      reward: 10000,
+      stack: '노드',
+      contents: '백엔드 주니어 신입 개발자',
+      company: {
+        Id: '애플_1234',
+      },
+      users: [user],
+    };
+
+    it(' 채용공고 신청 성공', async () => {
+      jest.spyOn(userService, 'findOne').mockImplementation(
+        (userId) =>
+          new Promise((resolve) => {
+            resolve(user);
+          }),
+      );
+      jest.spyOn(userService, 'checkApply').mockImplementation(
+        (user) =>
+          new Promise((resolve) => {
+            resolve(true);
+          }),
+      );
+      recruitmentRepository.findOne.mockResolvedValue(recruitment);
+      const users = recruitment.users;
+      recruitmentRepository.save.mockResolvedValue(applyRecruitment);
+      const result = await service.applyRecruitment({ userId, recruitmentId });
+      expect(result).toEqual(applyRecruitment);
     });
   });
 });
