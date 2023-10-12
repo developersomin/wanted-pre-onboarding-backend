@@ -12,6 +12,12 @@
 - Git commit 메시지 컨벤션 : [init] , [Feat], [Fix], [Docs] ,[Test] ,[Style] 사용
 - Unit Test : recruitmentService, userService 테스트 코드 작성
 
+## 개발 환경 
+<li> Ubuntu , WebStrom </li>
+<li> Nest.js , GraphQL, TypeORM , MySQL </li>
+
+
+
 ## 구현 과정
 
 ### 1. Entity Diagram
