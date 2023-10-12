@@ -270,4 +270,44 @@ describe('recruitmentService', () => {
       expect(result).toEqual(applyRecruitment);
     });
   });
+
+  describe('searchFindAll()', () => {
+    const recruitment1 = {
+      id: '1',
+      position: '백엔드',
+      reward: 10000,
+      stack: '노드',
+      contents: '백엔드 주니어 신입 개발자',
+      company: {
+        id: '애플_1234',
+        country: '미국',
+        area: '워싱턴',
+      },
+    };
+
+    it('검색어 잘 작동하는지 확인 ', async () => {
+      const fakeRecruitmentData = [recruitment1];
+
+      const search = '워싱턴';
+
+      const queryBuilder = {
+        innerJoinAndSelect: jest.fn().mockReturnThis(),
+        where: jest.fn().mockReturnThis(),
+        orWhere: jest.fn().mockReturnThis(),
+        getMany: jest.fn().mockResolvedValue(fakeRecruitmentData),
+      };
+      recruitmentRepository.createQueryBuilder.mockReturnValue(queryBuilder);
+
+      const result = await service.searchFindAll({ search });
+
+      expect(result).toEqual(fakeRecruitmentData);
+
+      expect(queryBuilder.innerJoinAndSelect).toHaveBeenCalledWith(
+        'recruitment.company',
+        'company',
+      );
+      expect(queryBuilder.orWhere).toHaveBeenCalledTimes(5);
+      expect(queryBuilder.getMany).toHaveBeenCalled();
+    });
+  });
 });
